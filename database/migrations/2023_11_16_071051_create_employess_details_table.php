@@ -14,7 +14,7 @@ return new class extends Migration
             $table->integer('id_karyawan_fk');
             $table->integer('experience');
             $table->string('job_tittle');
-            $table->string('jod_desc');
+            $table->string('job_desc');
             $table->timestamps();
 
             $table->foreign('id_karyawan_fk')->references('id_karyawan')->on('employees');

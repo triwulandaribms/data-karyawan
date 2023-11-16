@@ -57,8 +57,7 @@
         
                 <div class="mb-3 row text-center">
                     <div class="col-sm-12">
-                        {{-- <input type="submit" class="btn btn-primary mx-auto" value="SIMPAN"> --}}
-                        <button type="submit">Submit</button>
+                        <input type="submit" class="btn btn-primary mx-auto" value="SIMPAN">
                     </div>
                 </div>
             </form>

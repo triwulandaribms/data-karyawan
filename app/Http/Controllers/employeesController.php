@@ -21,34 +21,48 @@ class employeesController extends Controller
     }
 
 
-    public function store(Request $request)
-    {
-        $id_karyawan = $request->id_karyawan;
-    
-        $existingEmployee = Employees::where('id_karyawan', $id_karyawan)->first();
-    
-        if ($existingEmployee) {
-            $existingEmployee->update([
-                "name" => $request->name,
-                "dob" => $request->dob,
-                "status" => $request->status,
-                "join_date" => $request->join_date,
-            ]);
-    
-            return redirect()->to('/employees');
-        }
-    
-        Employees::create([
-            "id_karyawan" => $id_karyawan,
-            "name" => $request->name,
-            "dob" => $request->dob,
-            "status" => $request->status,
-            "join_date" => $request->join_date,
-        ]);
-    
-        return redirect()->to('/employees');
+//     public function store(Request $request)
+//     {
+//         $id_karyawan = $request->id_karyawan;
+
+//         $cekId = Employees::where('id_karyawan', $id_karyawan)->exists();
+
+//         if ($cekId) {
+//             return "id karyawan tidak boleh sama";
+//         }
+
+//         Employees::create([
+//             "id_karyawan" => $id_karyawan,
+//             "name" => $request->name,
+//             "dob" => $request->dob,
+//             "status" => $request->status,
+//             "join_date" => $request->join_date,
+//         ]);
+
+//         return redirect()->to('/employees');
+// }
+
+
+public function store(Request $request)
+{
+    $id_karyawan = $request->input('id_karyawan');
+
+    $cekId = Employees::where('id_karyawan', $id_karyawan)->exists();
+
+    if ($cekId) {
+        return "id karyawan tidak boleh sama";
     }
-    
+
+    Employees::create([
+        "id_karyawan" => $id_karyawan,
+        "name" => $request->input('name'),
+        "dob" => $request->input('dob'),
+        "status" => $request->input('status'),
+        "join_date" => $request->input('join_date'),
+    ]);
+
+    return redirect()->to('/employees');
+}
 
   
     public function show(string $id)

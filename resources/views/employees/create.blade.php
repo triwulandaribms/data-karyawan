@@ -21,9 +21,9 @@
             <form action="{{ route('employees.store') }}" method="post">
                 @csrf
                 <div class="mb-3 row">
-                    <label for="id" class="col-sm-2 col-form-label">ID KARYAWAN</label>
+                    <label for="id_karyawan" class="col-sm-2 col-form-label">ID KARYAWAN</label>
                     <div class="col-sm-10">
-                        <input type="number" name="id" class="form-control bg-light text-dark" id="id">
+                        <input type="number" name="id_karyawan" class="form-control bg-light text-dark" id="id_karyawan">
                     </div>
                 </div>
     
@@ -49,15 +49,16 @@
                 </div>
 
                 <div class="mb-3 row">
-                    <label for="join" class="col-sm-2 col-form-label">JOIN DATE</label>
+                    <label for="join_date" class="col-sm-2 col-form-label">JOIN DATE</label>
                     <div class="col-sm-10">
-                        <input type="date" name="join" class="form-control bg-light text-dark" id="join">
+                        <input type="date" name="join_date" class="form-control bg-light text-dark" id="join_date">
                     </div>
                 </div>
         
                 <div class="mb-3 row text-center">
                     <div class="col-sm-12">
-                        <input type="submit" class="btn btn-primary mx-auto" value="SIMPAN">
+                        {{-- <input type="submit" class="btn btn-primary mx-auto" value="SIMPAN"> --}}
+                        <button type="submit">Submit</button>
                     </div>
                 </div>
             </form>

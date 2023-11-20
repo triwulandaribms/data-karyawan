@@ -52,13 +52,13 @@
     <tbody >
         @foreach ($data_detail as $detail)
             <tr class="table-success">
-                <td>{{ $detail->id_detail_karyawan }}</td>
-                <td>{{ $detail->id_karyawan_fk }}</td>
+                <td>{{ $detail->id }}</td>
+                <td>{{ $detail->id_fk }}</td>
                 <td>{{ $detail->experience }}</td>
                 <td>{{ $detail->job_tittle }}</td>
                 <td>{{ $detail->job_desc }}</td>
                 <td>
-                    <form action="{{ route('detail.destroy', $detail->id_detail_karyawan) }}" method="POST">
+                    <form action="{{ route('detail.destroy', $detail->id) }}" method="POST">
                       @csrf
                       @method('DELETE')
                         <button>hapus</button>

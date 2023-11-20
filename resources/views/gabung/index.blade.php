@@ -53,7 +53,7 @@
   <tbody>
       @foreach ($data_tampil as $data)
       <tr class="table-success">
-          <td>{{ $data->id_karyawan }}</td>
+          <td>{{ $data->id_fk }}</td>
           <td>{{ $data->name }}</td>
           <td>{{ $data->dob }}</td>
           <td>{{ $data->status }}</td>

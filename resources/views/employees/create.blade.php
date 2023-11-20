@@ -18,15 +18,25 @@
 
   <main class="container">
         <div class="my-3 p-3 bg-body rounded shadow-sm">
+
+            @if ($errors->any())
+                <div class="alert alert-danger">
+                    <ul>
+                        @foreach ($errors->all() as $error)
+                            <li>{{ $error }}</li>
+                        @endforeach
+                    </ul>
+                </div>
+            @endif
+
             <form action="{{ route('employees.store') }}" method="post">
                 @csrf
                 <div class="mb-3 row">
-                    <label for="id_karyawan" class="col-sm-2 col-form-label">ID KARYAWAN</label>
-                    <div class="col-sm-10">
-                        <input type="number" name="id_karyawan" class="form-control bg-light text-dark" id="id_karyawan">
-                    </div>
+                
+                <div class="mb-3 row">
+                    <input type="hidden" name="id" class="form-control bg-light text-dark" id="id">
                 </div>
-    
+
                <div class="mb-3 row">
                     <label for="name" class="col-sm-2 col-form-label">NAME</label>
                     <div class="col-sm-10">
@@ -37,7 +47,7 @@
                 <div class="mb-3 row">
                     <label for="dob" class="col-sm-2 col-form-label">DOB</label>
                     <div class="col-sm-10">
-                        <input type="text" name="dob" class="form-control bg-light text-dark" id="dob">
+                        <input type="date" name="dob" class="form-control bg-light text-dark" id="dob">
                     </div>
                 </div>
         

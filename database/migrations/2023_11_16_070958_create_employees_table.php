@@ -9,11 +9,12 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('employees', function (Blueprint $table) {
-            $table->integer('id_karyawan')->unique();
+            $table->id();
             $table->string('name');
-            $table->string('dob');
+            $table->date('dob');
             $table->string('status');
             $table->date('join_date');
+            $table->softDeletes();
             $table->timestamps();
         });
     }

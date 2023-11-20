@@ -16,11 +16,11 @@ class EmployeesDetailsSeeder extends Seeder
 
         foreach (range(1, 20) as $index){
             DB::table('employess_details')->insert([
-                'id_detail_karyawan' => $faker->number,
-                'id_karyawan_fk' => $faker->number,
+                'id' => $faker->number,
+                'uuid_fk' => $faker->number,
                 'experience' => $faker->numberBetween(1, 10),
                 'job_tittle' => $faker->name,
-                'job_desc' => $faker->name,
+                'job_desc' => $faker->sentence,
             ]);
         }
     }

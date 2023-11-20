@@ -20,15 +20,25 @@
 
   <main class="container">
     <div class="my-3 p-3 bg-body rounded shadow-sm">
+        
+        @if ($errors->any())
+        <div class="alert alert-danger">
+            <ul>
+                @foreach ($errors->all() as $error)
+                    <li>{{ $error }}</li>
+                @endforeach
+            </ul>
+        </div>
+        @endif
 
-        <form action="{{ route('employees.update', $data_employees->id_karyawan) }}" method="post">
+        <form action="{{ route('employees.update', $data_employees->id) }}" method="post">
             @csrf
             @method('PUT')
         
             <div class="mb-3 row">
-                <label for=""  class="col-sm-2 col-form-label">ID KARYAWAN</label>
-                <div class="col-sm-10">
-                    <input type="number" name="id_karyawan" value="{{ $data_employees->id_karyawan }}" class="form-control bg-light text-dark" id="id">
+                <label for=""  class="col-sm-2 col-form-label">ID</label> 
+                 <div class="col-sm-10">
+                    <input type="text" name="id" value="{{ $data_employees->id }}"class="form-control bg-light text-dark" id="id">
                 </div>
             </div>
 
@@ -42,7 +52,7 @@
             <div class="mb-3 row">
                 <label for="" class="col-sm-2 col-form-label">DOB</label>
                 <div class="col-sm-10">
-                    <input type="text" name="dob" value="{{ $data_employees->dob }}" class="form-control bg-light text-dark" id="dob">
+                    <input type="date" name="dob" value="{{ $data_employees->dob }}" class="form-control bg-light text-dark" id="dob">
                 </div>
             </div>
 

@@ -10,7 +10,7 @@ class employeesDetailsController extends Controller
     
     public function index()
     {
-        $data_detail = EmployessDetails::orderBy('id_detail_karyawan', 'asc')->get();
+        $data_detail = EmployessDetails::orderBy('id', 'asc')->get();
         return view('detail.index', compact('data_detail'));
    
     }
@@ -24,23 +24,27 @@ class employeesDetailsController extends Controller
     
     public function store(Request $request)
     {
-        $id_detail_karyawan = $request->id_detail_karyawan;
-    
-        $cekId = EmployessDetails::where('id_detail_karyawan', $id_detail_karyawan)->exists();
-    
-        if ($cekId) {
-            return "id detail karyawan tidak boleh sama";
-        }
+        $request->validate([
+            'id_fk' => 'required',
+            'experience' => 'required',
+            'job_tittle' => 'required',
+            'job_desc' => 'required',
+        ],[
+            'id_fk.required' => 'id karyawan tidak boleh kosong.',
+            'experience.required' => 'pengalaman tidak boleh kosong.',
+            'job_tittle.required' => 'Job tittle tidak boleh kosong.',
+            'job_desc.required' => 'Join desc tidak boleh kosong.',
+        ]);
     
         EmployessDetails::create([
-            "id_detail_karyawan" => $id_detail_karyawan,
-            "id_karyawan_fk" => $request->id_karyawan_fk,
+            "id_fk" => $request->id_fk,
             "experience" => $request->experience,
             "job_tittle" => $request->job_tittle,
             "job_desc" => $request->job_desc,
         ]);
     
         return redirect()->to('/employeesDetails');
+
 
     }
 
@@ -52,7 +56,7 @@ class employeesDetailsController extends Controller
 
     public function edit(string $id)
     {
-        $data_detail = EmployessDetails::where('id_detail_karyawan',$id)->first();
+        $data_detail = EmployessDetails::where('id',$id)->first();
         return view('detail.edit', compact('data_detail'));
     }
 
@@ -65,7 +69,7 @@ class employeesDetailsController extends Controller
    
     public function destroy(string $id)
     {
-        EmployessDetails::where('id_detail_karyawan', $id)->delete();
+        EmployessDetails::where('id', $id)->delete();
 
         return redirect()->to('/employeesDetails');
 

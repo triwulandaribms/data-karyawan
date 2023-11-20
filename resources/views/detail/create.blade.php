@@ -20,24 +20,18 @@
         <div class="my-3 p-3 bg-body rounded shadow-sm">
             <form action="{{ route('detail.store') }}" method="post">
                 @csrf
-                <div class="mb-3 row">
-                    <label for="id_detail_karyawan" class="col-sm-2 col-form-label">ID DETAIL KARYAWAN</label>
-                    <div class="col-sm-10">
-                        <input type="number" name="id_detail_karyawan" class="form-control bg-light text-dark" id="id_detail_karyawan">
-                    </div>
-                </div>
-    
+            
                <div class="mb-3 row">
-                    <label for="id_karyawan_fk" class="col-sm-2 col-form-label">ID KARYAWAN </label>
+                    <label for="id_fk" class="col-sm-2 col-form-label">ID KARYAWAN </label>
                     <div class="col-sm-10">
-                        <input type="number" name="id_karyawan_fk" class="form-control bg-light text-dark" id="id_karyawan_fk">
+                        <input type="number" name="id_fk" class="form-control bg-light text-dark" id="uuid_fk">
                     </div>
                 </div>
                     
                 <div class="mb-3 row">
                     <label for="experience" class="col-sm-2 col-form-label">EXPERIENCE</label>
                     <div class="col-sm-10">
-                        <input type="text" name="experience" class="form-control bg-light text-dark" id="experience">
+                        <input type="number" name="experience" class="form-control bg-light text-dark" id="experience">
                     </div>
                 </div>
         

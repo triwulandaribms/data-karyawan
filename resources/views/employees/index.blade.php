@@ -40,7 +40,7 @@
             <table class="table table-success table-striped">
                 <thead>
                   <tr  class="table-success">
-                      <th>ID KARYAWAN</th>
+                      <th>ID</th>
                       <th>NAME</th>
                       <th>DOB</th>
                       <th>STATUS</th>
@@ -52,21 +52,21 @@
               <tbody >
                   @foreach ($data_employees as $employees)
                       <tr class="table-success">
-                          <td>{{ $employees->id_karyawan }}</td>
+                          <td>{{ $employees->id }}</td>
                           <td>{{ $employees->name }}</td>
                           <td>{{ $employees->dob }}</td>
                           <td>{{ $employees->status }}</td>
                           <td>{{ $employees->join_date }}</td>
                           <td>
-                              <form action="{{ route('employees.edit', $employees->id_karyawan) }}">
+                              <form action="{{ route('employees.edit', $employees->id) }}">
                                   <button>Edit</button>
                               </form>
                           </td>
                           <td>
-                              <form action="{{ route('employees.destroy', $employees->id_karyawan) }}" method="POST">
+                              <form id="deleteForm{{ $employees->id }}" action="{{ route('employees.destroy', $employees->id) }}"method="POST">
                                 @csrf
                                 @method('DELETE')
-                                  <button>hapus</button>
+                                  <button type="button" onclick="confirmDelete({{ $employees->id }})">hapus</button>
                               </form>
                           </td>
                       </tr>
@@ -81,8 +81,16 @@
         </div>
     
     </div>
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-u1OknCvxWvY5kfmNBILK2hRnQC3Pr17a+RTT6rIHI7NnikvbZlHgTPOOmMi466C8" crossorigin="anonymous">
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-u1OknCvxWvY5kfmNBILK2hRnQC3Pr17a+RTT6rIHI7NnikvbZlHgTPOOmMi466C8" crossorigin="anonymous"></script>
+    
+        <script>
+           function confirmDelete(id) {
+              var result = confirm("Apakah Anda yakin ingin menghapus data?");
+            if (result) {
+              document.getElementById('deleteForm' + id).submit();
+            }
+           }
         </script>
-      
-    </body>
+
+      </body>
     </html>

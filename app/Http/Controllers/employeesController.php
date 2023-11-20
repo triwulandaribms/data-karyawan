@@ -10,7 +10,7 @@ class employeesController extends Controller
   
     public function index()
     {
-        $data_employees = Employees::orderBy('id_karyawan', 'asc')->get();
+        $data_employees = Employees::orderBy('id', 'asc')->get();
         return view('employees.index', compact('data_employees'));
     }
 
@@ -21,48 +21,30 @@ class employeesController extends Controller
     }
 
 
-//     public function store(Request $request)
-//     {
-//         $id_karyawan = $request->id_karyawan;
+    public function store(Request $request)
+    {
+        
+        $request->validate([
+            'name' => 'required',
+            'dob' => 'required|date',
+            'status' => 'required',
+            'join_date' => 'required|date',
+        ],[
+            'name.required' => 'Nama tidak boleh kosong.',
+            'dob.required' => 'Tanggal lahir tidak boleh kosong.',
+            'status.required' => 'Status tidak boleh kosong.',
+            'join_date.required' => 'Tanggal bergabung tidak boleh kosong.',
+        ]);
 
-//         $cekId = Employees::where('id_karyawan', $id_karyawan)->exists();
+        Employees::create([
+            "name" => $request->input('name'),
+            "dob" => $request->input('dob'),
+            "status" => $request->input('status'),
+            "join_date" => $request->input('join_date'),
+        ]);
 
-//         if ($cekId) {
-//             return "id karyawan tidak boleh sama";
-//         }
-
-//         Employees::create([
-//             "id_karyawan" => $id_karyawan,
-//             "name" => $request->name,
-//             "dob" => $request->dob,
-//             "status" => $request->status,
-//             "join_date" => $request->join_date,
-//         ]);
-
-//         return redirect()->to('/employees');
-// }
-
-
-public function store(Request $request)
-{
-    $id_karyawan = $request->input('id_karyawan');
-
-    $cekId = Employees::where('id_karyawan', $id_karyawan)->exists();
-
-    if ($cekId) {
-        return "id karyawan tidak boleh sama";
+        return redirect()->to('/employees');
     }
-
-    Employees::create([
-        "id_karyawan" => $id_karyawan,
-        "name" => $request->input('name'),
-        "dob" => $request->input('dob'),
-        "status" => $request->input('status'),
-        "join_date" => $request->input('join_date'),
-    ]);
-
-    return redirect()->to('/employees');
-}
 
   
     public function show(string $id)
@@ -73,15 +55,32 @@ public function store(Request $request)
    
     public function edit(string $id)
     {
-        $data_employees = Employees::where('id_karyawan', $id)->first();
+        $data_employees = Employees::where('id', $id)->first();
         return view('employees.edit', compact('data_employees'));
     }
 
 
     public function update(Request $request, string $id)
     {
-        Employees::where('id_karyawan', $id)->update([
-            'id_karyawan'=> $request->id_karyawan,
+
+        $request->validate([
+            'name' => 'required',
+            'dob' => 'required|date',
+            'status' => 'required',
+            'join_date' => 'required|date',
+        ],[
+            'name.required' => 'Nama tidak boleh kosong.',
+            'dob.required' => 'Tanggal lahir tidak boleh kosong.',
+            'status.required' => 'Status tidak boleh kosong.',
+            'join_date.required' => 'Tanggal bergabung tidak boleh kosong.',
+        ]);
+        
+    
+        if ($request->id != $id) {
+            return redirect()->back()->withErrors(['id' => 'ID tidak boleh diubah.']);
+        }
+
+        Employees::where('id', $id)->update([
             'name' => $request->name,
             'dob' => $request->dob,
             'status' => $request->status,
@@ -93,7 +92,7 @@ public function store(Request $request)
 
     public function destroy(string $id)
     {
-        Employees::where('id_karyawan', $id)->delete();
+        Employees::where('id', $id)->delete();
         return redirect()->to('/employees');  
     }
 }

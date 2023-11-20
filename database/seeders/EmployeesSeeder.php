@@ -18,9 +18,9 @@ class EmployeesSeeder extends Seeder
 
         foreach (range(1, 20) as $index){
             DB::table('employees')->insert([
-                'id_karyawan' => $faker->number,
+                'id' => $faker->number,
                 'name' => $faker->name,
-                'dob' => $faker->name,
+                'dob' => $faker->date,
                 'status' => $faker->randomElement(['Actice', 'Inactive']),
                 'join_date' => $faker->date,
             ]);

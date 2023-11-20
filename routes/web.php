@@ -7,9 +7,9 @@ use App\Http\Controllers\employeesDetailsController;
 use App\Http\Controllers\gabungController;
 
 
-Route::get('/', function () {
-    return view('welcome');
-});
+// route halaman depan
+Route::get('/',function(){ return view('welcome'); });
+Route::get('/tampilAll', [employeesController::class, 'index'])->name('employees.index');
 
 // route karyawan
 Route::get('/employees',[employeesController::class, 'index'])->name('index');

@@ -58,10 +58,10 @@
                 <td>{{ $detail->job_tittle }}</td>
                 <td>{{ $detail->job_desc }}</td>
                 <td>
-                    <form action="{{ route('detail.destroy', $detail->id) }}" method="POST">
+                    <form id="deleteForm{{ $detail->id }}" action="{{ route('detail.destroy', $detail->id) }}"method="POST">
                       @csrf
                       @method('DELETE')
-                        <button>hapus</button>
+                        <button type="button" onclick="confirmDelete({{ $detail->id }})">hapus</button>
                     </form>
                 </td>
             </tr>

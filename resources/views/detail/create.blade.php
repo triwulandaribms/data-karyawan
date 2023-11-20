@@ -18,6 +18,17 @@
 
   <main class="container">
         <div class="my-3 p-3 bg-body rounded shadow-sm">
+
+            @if ($errors->any())
+            <div class="alert alert-danger">
+                <ul>
+                    @foreach ($errors->all() as $error)
+                        <li>{{ $error }}</li>
+                    @endforeach
+                </ul>
+            </div>
+            @endif
+            
             <form action="{{ route('detail.store') }}" method="post">
                 @csrf
             
